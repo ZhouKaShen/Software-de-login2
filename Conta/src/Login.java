@@ -6,6 +6,7 @@ public class Login {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+
         while (true) {
             System.out.println("\nCadastro:\n");
 
@@ -39,7 +40,15 @@ public class Login {
                     System.out.println("Digite a senha: ");
                     String senhaLogin = scanner.nextLine();
 
-                    if (senhaLogin.equals(senha) && nomeLogin.equals(usuario)) {
+                    boolean autenticado = false;
+                    for (Cadastro c : CadastroCSV.listarCadastro()) {
+                        if (c.getUsuario().equals(nomeLogin) && c.getSenha().equals(senhaLogin)) {
+                            autenticado = true;
+                            break;
+                        }
+                    }
+
+                    if (autenticado) {
                         System.out.println("Login bem-sucedido!");
                         break;
                     } else {
@@ -63,4 +72,3 @@ public class Login {
         CadastroCSV.listarCadastro();
     }
 }
-
