@@ -69,6 +69,6 @@ public class Login {
         }
 
         // Listagem dos cadastros
-        CadastroCSV.listarCadastro();
+        // CadastroCSV.listarCadastro();
     }
 }
