@@ -76,6 +76,4 @@ public class CadastroCSV {
         }
         return lista;
     }
-
-
 }
