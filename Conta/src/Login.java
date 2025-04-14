@@ -6,7 +6,6 @@ import Menu.Menu;
 public class Login {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Menu menu = new Menu();
 
         while(true) {
             System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
@@ -27,11 +26,9 @@ public class Login {
 
                         System.out.println("Digite o usuário: ");
                         String usuario = scanner.nextLine();
-                        scanner.nextLine();
 
                         System.out.println("Digite a senha: ");
                         String senha = scanner.nextLine();
-                        scanner.nextLine();
 
                         boolean leitura = false;
                         boolean exclusao = false;
@@ -40,39 +37,23 @@ public class Login {
                         System.out.println("Gostaria de adicionar permissões?");
                         System.out.println(("Insira a informação (s/n):"));
                         String afirmacao = scanner.nextLine();
-                        scanner.nextLine();
 
                         if (afirmacao.equalsIgnoreCase("s")) {
                             System.out.println("Gostaria de ter permissão para ler? (s/n)");
                             String leituraResposta = scanner.nextLine();
-                            scanner.nextLine();
-                            if (leituraResposta.equalsIgnoreCase("s")) {
-                                leitura = true;
-                            }
+                            if (leituraResposta.equalsIgnoreCase("s")) leitura = true;
 
                             System.out.println("Gostaria de ter permissão para excluir? (s/n):");
                             String exclusaoResposta = scanner.nextLine();
-                            scanner.nextLine();
-                            if (exclusaoResposta.equalsIgnoreCase("s")) {
-                                exclusao = true;
-                            }
+                            if (exclusaoResposta.equalsIgnoreCase("s")) exclusao = true;
 
                             System.out.println("Gostaria de ter permissão para executar? (s/n): ");
                             String executarResposta = scanner.nextLine();
-                            scanner.nextLine();
-                            if (executarResposta.equalsIgnoreCase("s")) {
-                                execucao = true;
-                            }
+                            if (executarResposta.equalsIgnoreCase("s")) execucao = true;
 
                             Cadastro cadastro = new Cadastro(usuario, senha, leitura, exclusao, execucao);
                             CadastroCSV.adiconarCadastro(cadastro); // com permissão
-                            System.out.println("Cadastrado com permissão");
-                            break;
-                        }
-                        else {
-                            Cadastro cadastro = new Cadastro(usuario, senha, leitura, exclusao, execucao);
-                            CadastroCSV.adiconarCadastro(cadastro); // sem permissão
-                            System.out.println("Cadastrado sem permissão");
+                            System.out.println("Cadastrado com sucesso!");
                             break;
                         }
                     } break;
@@ -80,7 +61,6 @@ public class Login {
                     // Login
                     System.out.println("Deseja fazer login? (s/n)");
                     String informacao = scanner.nextLine();
-                    scanner.nextLine();
 
                     if (informacao.equalsIgnoreCase("s")) {
                         int maxTentativas = 5;
@@ -93,19 +73,22 @@ public class Login {
                             System.out.println("Digite a senha: ");
                             String senhaLogin = scanner.nextLine();
 
-                            boolean autenticado = false;
+                            Cadastro autenticado = null;
                             for (Cadastro c : CadastroCSV.listarCadastro()) {
                                 if (c.getUsuario().equals(nomeLogin) && c.getSenha().equals(senhaLogin)) {
-                                    autenticado = true;
+                                    autenticado = c;
                                     break;
+                                    // Irá verificar se existe um usuário na lista de cadastro
+                                    // Se verificado -> salvar no autenticado
                                 }
                             }
 
-                            if (autenticado) {
+                            // Verificado -> login sucedido.
+                            if (autenticado != null) {
+                                Menu menu = new Menu();
                                 System.out.println("Login bem-sucedido!");
                                 System.out.println("Usuário autenticado!");
-                                Menu logado = new Menu();
-                                logado.menuTela();
+                                menu.menuTela(autenticado);
                                 break;
                             } else {
                                 tentativas++;
@@ -115,6 +98,7 @@ public class Login {
 
                                 if (tentativas >= maxTentativas) {
                                     System.out.println("Programa interrompido pelo excesso de tentativas!\n");
+                                    return;
                                 }
                             }
                         }
@@ -122,9 +106,10 @@ public class Login {
                 case 3:
                     System.out.println("\nSaindo do programa...");
                     System.out.println("\nFim do programa!");
-                    break;
+                    return;
                 default:
                     System.out.println("Opção inválida!");
+                    break;
             }
         }
     }

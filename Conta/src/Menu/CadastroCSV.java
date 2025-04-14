@@ -16,11 +16,11 @@ public class CadastroCSV {
             // Abre o escritor para adicionar dados ao arquivo
             FileWriter escritor = new FileWriter(nomeArquivo, StandardCharsets.ISO_8859_1, true);
             if (!arquivoExiste) {
-                escritor.write("Nome;Senha;Verificado\n");
+                escritor.write("Nome;Senha;Leitura;Exclusao;Execuçao\n");
             }
 
             // Escrever os dados do cadastro no formato apropriado
-            escritor.write(c.getUsuario() + ";" + c.getSenha() + ";" + c.isVerificado() + "\n");
+            escritor.write(c.getUsuario() + ";" + c.getSenha() + ";" + c.isLeitura() + ";" + c.isExclusao() + ";" + c.isExecucao() + "\n");
 
             // Escrever todos os dados do buffer no arquivo imediatamente
             escritor.flush();
@@ -54,19 +54,25 @@ public class CadastroCSV {
                 // Dividir a linha em partes usando o ponto e vírgula como separador
                 String[] partes = linha.split(";");
 
+                if (partes.length < 5) {
+                    System.out.println("Linha mal formatada ou incompleta: " + linha);
+                    continue;
+                }
+
                 String usuario = partes[0];
                 String senha = String.valueOf(partes[1]);
-                boolean verificado = Boolean.parseBoolean(partes[2]);
+                boolean leitura = Boolean.parseBoolean(partes[2]);
+                boolean exclusao = Boolean.parseBoolean(partes[3]);
+                boolean execucao = Boolean.parseBoolean(partes[4]);
 
                 // Criar o objeto cadastro
-                Cadastro c = new Cadastro(usuario, senha, verificado);
+                Cadastro c = new Cadastro(usuario, senha, leitura, exclusao, execucao);
 
                 // Adiciona na lista
                 lista.add(c);
 
                 // Imprimir informações do cadastro
-                System.out.format("Nome do usuário: %s - Senha: %s - Verificado: %b\n", usuario, senha, verificado);
-
+                // System.out.format("Nome do usuário: %s - Senha: %s - Leitura: %b - Exclusão: %b - Execução: %b\n", usuario, senha, leitura, exclusao, execucao);
             }
 
             leitor.close();

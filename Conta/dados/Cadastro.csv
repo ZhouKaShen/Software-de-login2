@@ -1,7 +1,4 @@
-Nome;Senha;Verificado
-Nome;123;true
-Sigma;123;true
-Pedro da silva;123;true
-Pedro da silva;123;true
-Sigma da bahia;123;true
-Sigma da bahia 2;Sigma123;true
+Nome;Senha;Leitura;Exclusao;Execuçao
+Pedro;123;false;false;true
+Cleverson;;true;true;true
+Cleverson 2;123;true;true;true

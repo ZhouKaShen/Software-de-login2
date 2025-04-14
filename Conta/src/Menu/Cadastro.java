@@ -3,16 +3,14 @@ package Menu;
 public class Cadastro {
     private String usuario;
     private String senha;
-    private Boolean leitura;
-    private Boolean exclusao;
-    private Boolean execucao;
+    private Boolean leitura = false;
+    private Boolean exclusao = false;
+    private Boolean execucao = false;
 
     public Cadastro() {
         this.usuario = usuario;
         this.senha = senha;
-        this.leitura = false;
-        this.exclusao = false;
-        this.execucao = false;
+
     }
 
     public Cadastro(String usuario, String senha, boolean leitura, boolean exclusao, boolean execucao) {
