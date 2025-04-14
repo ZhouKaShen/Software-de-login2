@@ -3,18 +3,24 @@ package Menu;
 public class Cadastro {
     private String usuario;
     private String senha;
-    private Boolean verificado;
+    private Boolean leitura;
+    private Boolean exclusao;
+    private Boolean execucao;
 
     public Cadastro() {
         this.usuario = usuario;
         this.senha = senha;
-        this.verificado = verificado;
+        this.leitura = false;
+        this.exclusao = false;
+        this.execucao = false;
     }
 
-    public Cadastro(String usuario, String senha, boolean verificado) {
+    public Cadastro(String usuario, String senha, boolean leitura, boolean exclusao, boolean execucao) {
         this.usuario = usuario;
         this.senha = senha;
-         this.verificado = verificado;
+         this.leitura = leitura;
+        this.exclusao = exclusao;
+        this.execucao = execucao;
     }
 
     @Override
@@ -41,12 +47,27 @@ public class Cadastro {
         this.senha = senha;
     }
 
-    public Boolean isVerificado() {
-        return verificado;
+    public Boolean isLeitura() {
+        return leitura;
     }
 
-    public void setVerificado(boolean verificado) {
-        this.verificado = verificado;
+    public void setLeitura(boolean leitura) {
+        this.leitura = leitura;
     }
 
+    public Boolean isExclusao() {
+        return exclusao;
+    }
+
+    public void setExclusao(boolean exclusao) {
+        this.exclusao = exclusao;
+    }
+
+    public Boolean isExecucao() {
+        return execucao;
+    }
+
+    public void setExecucao(boolean Execucao) {
+        this.execucao = execucao;
+    }
 }
