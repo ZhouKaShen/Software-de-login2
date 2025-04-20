@@ -48,7 +48,7 @@ public class Menu {
 
                 case 2:
                     if (autenticado.isLeitura()) {
-                        System.out.println("\nCriando arquivo... ");
+                        System.out.println("\nCriando arquivo...");
 
                         File pastaCriando = new File("./arquivosEscritos");
                         if (!pastaCriando.exists()) {

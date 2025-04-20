@@ -18,7 +18,6 @@ public class CadastroCSV {
             if (!arquivoExiste) {
                 escritor.write("Nome;Senha;Leitura;Exclusao;Execuçao\n");
             }
-
             // Escrever os dados do cadastro no formato apropriado
             escritor.write(c.getUsuario() + ";" + c.getSenha() + ";" + c.isLeitura() + ";" + c.isExclusao() + ";" + c.isExecucao() + "\n");
 
